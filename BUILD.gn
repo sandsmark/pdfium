@@ -23,8 +23,28 @@ config("pdfium_common_config") {
     "OPJ_STATIC",
     "PNG_PREFIX",
     "PNG_USE_READ_MACROS",
-    "FPDFSDK_EXPORTS",
   ]
+
+  if (pdf_is_shared_lib) {
+      shared_library("pdfium") {
+          public_deps = [
+              ":fpdfsdk",
+          ]
+      }
+      defines += [
+          "FPDFSDK_EXPORTS",
+      ]
+  } else {
+      static_library("pdfium") {
+          public_deps = [
+              ":fpdfsdk",
+          ]
+
+          if (pdf_is_complete_lib) {
+            complete_static_lib = true
+          }
+      }
+  }
 
   if (pdf_use_skia) {
     defines += [ "_SKIA_SUPPORT_" ]
@@ -101,7 +121,7 @@ config("xfa_warnings") {
   }
 }
 
-shared_library("pdfium") {
+static_library("fpdfsdk") {
   sources = [
     "fpdfsdk/cba_annotiterator.cpp",
     "fpdfsdk/cba_annotiterator.h",
@@ -225,10 +245,6 @@ shared_library("pdfium") {
       "AppKit.framework",
       "CoreFoundation.framework",
     ]
-  }
-
-  if (pdf_is_complete_lib) {
-    complete_static_lib = true
   }
 }
 
