@@ -1,0 +1,27 @@
+language: cpp
+os: osx
+osx_image: xcode8.3
+
+install:
+    - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
+    - export PATH=$PATH:$HOME/depot_tools/
+    - gclient config https://github.com/sandsmark/pdfium.git --unmanaged
+    - gclient sync
+
+script:
+    - export PATH=$PATH:$HOME/depot_tools/
+    - pushd pdfium
+    - gn gen --args="pdf_bundle_freetype=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false use_system_zlib=false use_system_freetype=false pdf_is_standalone=true is_component_build=false is_official_build=true is_debug=false" out
+    - pushd out
+    - ninja pdfium
+    - popd
+    - popd
+    - tar czf pdfium-prebuilt-macos.tgz pdfium/public pdfium/out/obj/libpdfium.a
+
+deploy:
+    provider: releases
+    api_key:
+        secure: CMRK7aylt21YrfkZkMRoi5QsRdUPuXTH/D4IZpH6jqoas0OTRB6bVCN5WeVRhi7/+yGjRt99TmlA+U0TtTWwR7chOSbpbHhL+3PaL9Ms5OtKnC0hz4WAtr5PO6bBIue/ms+hDFzZz2Oz8W5lE29Erapm/6gKrEYWwh/CWvsDAloNecceODbM1pAWWT0imNnTmaoIVQ7mIqoTZD2joCnTWZ75tSvGTcE7AKkn235Qc37+4dev/AugSaZlgkvjEFEs83HAOstXUA+V+ea50mrScCQm9Gu0b+Eot+zVWWF42CMf/EYLdoZMhLyA79Cvw0oJjj2cwoCsgCJ8yoZjWFQDwv4SIwIo4KH61nA0KlEkFmozkPb+9QRu7KlNdS2eZM2CdnheKEHyKeE5QFgw0WCkRQHpZ91l/f/YBxN5fuqMuQPG9tZlu/VQSsX0hkkKNXaRZUGxHoxyU7r+nu3+eMVsgrE+nfH4xbAbtXPXf9VCeDGi6Rwlw9GVSrYjBsWFVbp98pRzphL+XnZAXPIMoVQ96G8+v9NTdjQSA14WfLU0RCn9mlMQQVbdd0QxRi6x+q0gWkxh++M5vnFkuqA4eW+4E1ue24Yb12hRJVlI5R7T9Jn2IzQmJtIifbYH+cUZxFZmfr1mN3qwIdIcigEysLjLZcwypDqq9JfkGlrynPMLk0k=
+    file: "pdfium-prebuilt-macos.tgz"
+    skip_cleanup: true
+
