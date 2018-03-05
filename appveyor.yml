@@ -32,7 +32,7 @@ install:
 build_script:
   - set DEPOT_TOOLS_WIN_TOOLCHAIN=0
   - cd %APPVEYOR_BUILD_FOLDER%\pdfium
-  - if "%CONFIGURATION%" == "Debug" gn gen --args="pdf_bundle_freetype=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false use_system_zlib=false use_system_freetype=false pdf_is_standalone=true is_component_build=false is_official_build=true is_debug=true target_cpu=\"%platform%\"" "out/release"
+  - if "%CONFIGURATION%" == "Debug" gn gen --args="pdf_bundle_freetype=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false use_system_zlib=false use_system_freetype=false pdf_is_standalone=true is_component_build=false is_official_build=false is_debug=true target_cpu=\"%platform%\"" "out/release"
   - if "%CONFIGURATION%" == "Release" gn gen --args="pdf_bundle_freetype=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false use_system_zlib=false use_system_freetype=false pdf_is_standalone=true is_component_build=false is_official_build=true is_debug=false target_cpu=\"%platform%\"" "out/release"
   - cd out/release
   - ninja pdfium
