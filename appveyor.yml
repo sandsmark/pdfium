@@ -36,7 +36,6 @@ build_script:
   - cd out/release
   - ninja pdfium
   - 7z a pdfium.zip %APPVEYOR_BUILD_FOLDER%\pdfium\public
-  - 7z a pdfium.zip %APPVEYOR_BUILD_FOLDER%\pdfium\out\obj
 
 
 artifacts:
