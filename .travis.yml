@@ -16,12 +16,12 @@ script:
     - ninja pdfium
     - popd
     - popd
-    - tar czf pdfium.tgz pdfium/
+    - tar czf pdfium.tgz pdfium/public pdfium/out/obj/libpdfium.a
 
 deploy:
     provider: releases
     api_key:
         secure: CMRK7aylt21YrfkZkMRoi5QsRdUPuXTH/D4IZpH6jqoas0OTRB6bVCN5WeVRhi7/+yGjRt99TmlA+U0TtTWwR7chOSbpbHhL+3PaL9Ms5OtKnC0hz4WAtr5PO6bBIue/ms+hDFzZz2Oz8W5lE29Erapm/6gKrEYWwh/CWvsDAloNecceODbM1pAWWT0imNnTmaoIVQ7mIqoTZD2joCnTWZ75tSvGTcE7AKkn235Qc37+4dev/AugSaZlgkvjEFEs83HAOstXUA+V+ea50mrScCQm9Gu0b+Eot+zVWWF42CMf/EYLdoZMhLyA79Cvw0oJjj2cwoCsgCJ8yoZjWFQDwv4SIwIo4KH61nA0KlEkFmozkPb+9QRu7KlNdS2eZM2CdnheKEHyKeE5QFgw0WCkRQHpZ91l/f/YBxN5fuqMuQPG9tZlu/VQSsX0hkkKNXaRZUGxHoxyU7r+nu3+eMVsgrE+nfH4xbAbtXPXf9VCeDGi6Rwlw9GVSrYjBsWFVbp98pRzphL+XnZAXPIMoVQ96G8+v9NTdjQSA14WfLU0RCn9mlMQQVbdd0QxRi6x+q0gWkxh++M5vnFkuqA4eW+4E1ue24Yb12hRJVlI5R7T9Jn2IzQmJtIifbYH+cUZxFZmfr1mN3qwIdIcigEysLjLZcwypDqq9JfkGlrynPMLk0k=
-        file: "pdfium.tgz"
-        skip_cleanup: true
+    file: "pdfium.tgz"
+    skip_cleanup: true
 
