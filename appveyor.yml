@@ -40,7 +40,6 @@ build_script:
 
 
 artifacts:
-  - path: '**\pdfium.dll'
+  - path: '**\pdfium.dll*'
   - path: '**\pdfium.lib'
-  - path: '**\pdfium.*'
   - path: '**\pdfium.zip'
