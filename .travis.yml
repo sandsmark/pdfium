@@ -1,6 +1,6 @@
 language: cpp
 os: osx
-osx_image: xcode8.3
+osx_image: xcode8
 
 install:
     - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $HOME/depot_tools
@@ -16,7 +16,7 @@ script:
     - ninja pdfium
     - popd
     - popd
-    - tar czf pdfium-prebuilt-macos.tgz pdfium/public pdfium/out/obj/libpdfium.a
+    - tar czf pdfium-prebuilt-macos.tgz pdfium/public pdfium/out/
 
 deploy:
     provider: releases
