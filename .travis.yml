@@ -11,6 +11,7 @@ install:
 script:
     - export PATH=$PATH:$HOME/depot_tools/
     - pushd pdfium
+    - git checkout "chromium/$(curl https://omahaproxy.appspot.com/linux?channel=stable | cut -d'.' -f 3)"
     - gn gen --args="pdf_bundle_freetype=true pdf_enable_v8=false pdf_enable_xfa=false pdf_use_skia=false use_system_zlib=false use_system_freetype=false pdf_is_standalone=true is_component_build=false is_official_build=true is_debug=false pdf_is_complete_lib=true" out
     - pushd out
     - ninja pdfium
