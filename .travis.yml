@@ -16,12 +16,8 @@ script:
     - pushd out
     - ninja pdfium
     - popd
-    - gn gen --args="pdf_is_complete_lib=true is_component_build=false is_debug=false target_os=\"android\"" out-android
-    - pushd out-android
-    - ninja pdfium
     - popd
-    - popd
-    - tar czf pdfium-prebuilt-macos.tgz pdfium/public pdfium/out/ pdfium/out-android/
+    - tar czf pdfium-prebuilt-macos.tgz pdfium/public pdfium/out/
 
 deploy:
     provider: releases
