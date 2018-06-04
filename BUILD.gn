@@ -240,11 +240,6 @@ shared_library("pdfium") {
       "CoreFoundation.framework",
     ]
   }
-
-  if (pdf_is_complete_lib) {
-    complete_static_lib = true
-    configs -= [ "//build/config/compiler:thin_archive" ]
-  }
 }
 
 source_set("test_support") {
