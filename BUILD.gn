@@ -3,7 +3,6 @@
 # found in the LICENSE file.
 
 import("//build/config/freetype/freetype.gni")
-import("//build/config/jumbo.gni")
 import("//testing/test.gni")
 import("pdfium.gni")
 
@@ -23,7 +22,6 @@ config("pdfium_common_config") {
   defines = [
     "OPJ_STATIC",
     "PNG_PREFIX",
-"FPDFSDK_EXPORTS",
     "PNG_USE_READ_MACROS",
   ]
 
@@ -102,7 +100,7 @@ config("xfa_warnings") {
   }
 }
 
-shared_library("pdfium") {
+static_library("pdfium") {
   sources = [
     "fpdfsdk/cfx_systemhandler.cpp",
     "fpdfsdk/cfx_systemhandler.h",
@@ -239,6 +237,10 @@ shared_library("pdfium") {
       "AppKit.framework",
       "CoreFoundation.framework",
     ]
+  }
+  if (pdf_is_complete_lib) {
+    complete_static_lib = true
+    configs -= [ "//build/config/compiler:thin_archive" ]
   }
 }
 
