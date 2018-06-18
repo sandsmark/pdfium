@@ -153,10 +153,10 @@ typedef int FPDF_OBJECT_TYPE;
 
 #if defined(_WIN32) && defined(FPDFSDK_EXPORTS)
 // On Windows system, functions are exported in a DLL
-#define FPDF_EXPORT __declspec(dllexport)
+#define FPDF_EXPORT __attribute__ ((visibility ("default"))) __declspec(dllexport)
 #define FPDF_CALLCONV __stdcall
 #else
-#define FPDF_EXPORT
+#define FPDF_EXPORT __attribute__ ((visibility ("default")))
 #define FPDF_CALLCONV
 #endif
 
